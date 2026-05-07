@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Karan & SS — Our Story</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+/* ── RESET & BASE ── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --cream: #faf7f2;
+  --warm: #f3ede3;
+  --blush: #e8c4b8;
+  --rose: #c4756a;
+  --deep-rose: #8b3a3a;
+  --terra: #c47a5a;
+  --gold: #c4a35a;
+  --charcoal: #2a2320;
+  --mid: #5a4a42;
+  --muted: #9a8880;
+  --light: #c5b8b0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--cream);
+  color: var(--charcoal);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+  /* NO overflow-x:hidden on body — breaks iOS scroll */
+}
+
+/* ── HERO ──
+   Key fix: no overflow:hidden, no absolute children with transforms,
+   use ::before for decorative bg instead */
+.hero {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 3rem 1.5rem 4rem;
+  background: var(--charcoal);
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 15% 80%, rgba(196,117,90,0.2) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 70% at 85% 20%, rgba(196,163,90,0.13) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.hero > * { position: relative; }
+
+.hero-eyebrow {
+  font-size: 0.65rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+  animation: fadeUp 0.9s ease 0.2s both;
+}
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3rem, 13vw, 7rem);
+  font-weight: 300;
+  color: var(--cream);
+  line-height: 1.05;
+  animation: fadeUp 0.9s ease 0.45s both;
+}
+
+.hero-title em { font-style: italic; color: var(--blush); }
+
+.hero-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(0.95rem, 3vw, 1.35rem);
+  color: var(--light);
+  margin-top: 1.2rem;
+  max-width: 480px;
+  animation: fadeUp 0.9s ease 0.7s both;
+}
+
+.hero-stats {
+  display: flex;
+  gap: clamp(1.5rem, 5vw, 3.5rem);
+  margin-top: 3rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  animation: fadeUp 0.9s ease 0.95s both;
+}
+
+.stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.8rem, 7vw, 2.5rem);
+  font-weight: 300;
+  color: var(--blush);
+  display: block;
+}
+
+.stat-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.2rem;
+}
+
+.scroll-cue {
+  margin-top: 3.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--muted);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  animation: fadeIn 1s ease 1.8s both;
+}
+
+.scroll-bar {
+  width: 1px;
+  height: 36px;
+  background: linear-gradient(to bottom, var(--muted), transparent);
+  animation: breathe 2s ease-in-out infinite;
+}
+
+@keyframes breathe { 0%,100%{opacity:.3} 50%{opacity:.9} }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+/* ── NAV ── */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: rgba(250,247,242,0.93);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(196,163,90,0.18);
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  /* Will-change on sticky nav helps iOS not repaint it as blank */
+  will-change: transform;
+}
+
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--deep-rose);
+  white-space: nowrap;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.2rem;
+  list-style: none;
+  flex-wrap: wrap;
+}
+
+.nav-links a {
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--mid);
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  padding: 0.3rem 0;
+  display: inline-block;
+}
+
+.nav-links a:hover, .nav-links a:active { color: var(--deep-rose); }
+
+/* ── SECTIONS ── */
+.section {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 5rem 1.5rem;
+}
+
+.section--dark { background: var(--charcoal); }
+.section--warm { background: var(--warm); }
+
+.eyebrow {
+  font-size: 0.62rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.8rem;
+}
+
+.heading {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--charcoal);
+  margin-bottom: 1.2rem;
+}
+
+.heading em { font-style: italic; color: var(--rose); }
+.section--dark .heading { color: var(--cream); }
+
+.rule {
+  width: 50px;
+  height: 1px;
+  background: linear-gradient(to right, var(--gold), transparent);
+  margin: 1.2rem 0 1.8rem;
+}
+
+.body-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.05rem, 2.5vw, 1.2rem);
+  line-height: 1.9;
+  color: var(--mid);
+}
+
+.body-text strong { color: var(--charcoal); font-weight: 600; }
+
+/* ── SCROLL REVEAL ──
+   CRITICAL: On iOS, elements with `transform` on load combined with
+   overflow:hidden ancestors create blank regions. Solution:
+   - Use opacity only for the hidden state
+   - Use translateY via CSS class toggle (not initial style)
+   - Never put overflow:hidden on scroll containers           */
+.reveal {
+  opacity: 0;
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+.reveal.in {
+  opacity: 1;
+  transform: none !important;
+}
+
+/* Slight upward shift on reveal — applied before .in via JS */
+.reveal-up {
+  transform: translateY(18px);
+}
+
+.scale-reveal {
+  opacity: 0;
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.scale-reveal.in {
+  opacity: 1;
+  transform: none !important;
+}
+
+.scale-down {
+  transform: scale(0.96);
+}
+
+/* ── FIRST MESSAGE ── */
+.first-msg {
+  margin-top: 2.5rem;
+  padding: 2rem 2rem 2rem 2.5rem;
+  background: var(--charcoal);
+  border-left: 3px solid var(--rose);
+}
+
+.first-msg blockquote {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(1.2rem, 3.5vw, 1.5rem);
+  color: var(--cream);
+  line-height: 1.55;
+}
+
+.first-msg cite {
+  display: block;
+  font-family: 'DM Sans', sans-serif;
+  font-style: normal;
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-top: 1rem;
+}
+
+/* ── TIMELINE ── */
+.timeline {
+  margin-top: 3.5rem;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--gold), var(--blush), rgba(197,184,176,0.25));
+}
+
+.t-item {
+  position: relative;
+  padding-bottom: 3.5rem;
+}
+
+.t-item:last-child { padding-bottom: 0; }
+
+.t-dot {
+  position: absolute;
+  left: -1.85rem;
+  top: 0.4rem;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--gold);
+  outline: 2px solid var(--warm);
+  outline-offset: 2px;
+}
+
+.t-dot.rose  { background: var(--rose); }
+.t-dot.blush { background: var(--blush); }
+.t-dot.terra { background: var(--terra); }
+
+.t-date {
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+}
+
+.t-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.3rem, 4vw, 1.65rem);
+  font-weight: 400;
+  color: var(--charcoal);
+  margin-bottom: 0.7rem;
+  line-height: 1.2;
+}
+
+.t-body {
+  font-size: 0.9rem;
+  line-height: 1.82;
+  color: var(--mid);
+  max-width: 560px;
+}
+
+.t-quote {
+  margin-top: 1rem;
+  padding: 0.9rem 1.2rem;
+  border-left: 2px solid var(--blush);
+  background: var(--cream);
+}
+
+.section--warm .t-quote { background: var(--cream); }
+
+.t-quote p {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--mid);
+  line-height: 1.55;
+}
+
+.t-quote .sp {
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.4rem;
+  font-style: normal;
+}
+
+.tag {
+  display: inline-block;
+  margin-top: 0.9rem;
+  padding: 0.22rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border: 1px solid currentColor;
+}
+
+.tag-sweet { color: var(--rose); }
+.tag-ms    { color: var(--gold); }
+.tag-love  { color: var(--deep-rose); }
+.tag-real  { color: var(--muted); }
+
+/* ── NOTES ── */
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.2rem;
+  margin-top: 2.5rem;
+}
+
+.note {
+  background: var(--warm);
+  padding: 1.5rem;
+  border-bottom: 2px solid var(--blush);
+}
+
+.note-from {
+  font-size: 0.58rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.7rem;
+}
+
+.note-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(1rem, 2.8vw, 1.15rem);
+  color: var(--charcoal);
+  line-height: 1.6;
+}
+
+.note-date {
+  font-size: 0.6rem;
+  color: var(--light);
+  margin-top: 0.8rem;
+  letter-spacing: 0.08em;
+}
+
+/* ── NUMBERS ── */
+.numbers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.num-box {
+  text-align: center;
+  padding: 1.5rem 1rem;
+  border: 1px solid rgba(196,163,90,0.22);
+}
+
+.num-big {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 7vw, 3rem);
+  font-weight: 300;
+  color: var(--gold);
+  display: block;
+  line-height: 1;
+}
+
+.num-desc {
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.5rem;
+  line-height: 1.5;
+}
+
+/* ── QUIRKS ── */
+.quirks-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem 3rem;
+  margin-top: 3rem;
+}
+
+@media (max-width: 560px) { .quirks-grid { grid-template-columns: 1fr; } }
+
+.quirk-col h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.25rem;
+  color: var(--rose);
+  margin-bottom: 1rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid rgba(197,184,176,0.4);
+}
+
+.quirk-list { list-style: none; }
+
+.quirk-list li {
+  font-size: 0.88rem;
+  color: var(--mid);
+  line-height: 1.75;
+  padding: 0.45rem 0 0.45rem 1.1rem;
+  border-bottom: 1px solid rgba(197,184,176,0.25);
+  position: relative;
+}
+
+.quirk-list li::before {
+  content: '–';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+}
+
+/* ── ACCORDION (hard parts) ── */
+details {
+  border-bottom: 1px solid rgba(196,184,176,0.3);
+}
+
+details summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+  cursor: pointer;
+  list-style: none;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1rem, 3vw, 1.15rem);
+  color: var(--charcoal);
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  gap: 1rem;
+}
+
+details summary::-webkit-details-marker { display: none; }
+
+details summary::after {
+  content: '+';
+  font-size: 1.2rem;
+  color: var(--gold);
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+  display: inline-block;
+}
+
+details[open] summary::after { transform: rotate(45deg); }
+
+.detail-body {
+  padding: 0 0 1.2rem;
+  font-size: 0.9rem;
+  line-height: 1.78;
+  color: var(--mid);
+}
+
+/* ── ILY ── */
+.ily-wrap {
+  background: var(--charcoal);
+  padding: 6rem 1.5rem;
+  text-align: center;
+  position: relative;
+}
+
+.ily-wrap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(139,58,58,0.25), transparent);
+  pointer-events: none;
+}
+
+.ily-wrap > * { position: relative; }
+
+.ily-eyebrow {
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+  display: block;
+}
+
+.ily-heading {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.8rem, 7vw, 4rem);
+  font-weight: 300;
+  color: var(--cream);
+  line-height: 1.2;
+  margin-bottom: 2.5rem;
+}
+
+.ily-heading em { font-style: italic; color: var(--blush); }
+
+.ily-chat {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 380px;
+  margin: 0 auto;
+}
+
+.bubble {
+  padding: 0.8rem 1.4rem;
+  border-radius: 1.4rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1rem, 3vw, 1.2rem);
+  font-style: italic;
+  line-height: 1.5;
+  max-width: 82%;
+}
+
+.bubble-her {
+  background: rgba(232,196,184,0.14);
+  border: 1px solid rgba(232,196,184,0.3);
+  color: var(--blush);
+  align-self: flex-start;
+}
+
+.bubble-him {
+  background: rgba(196,163,90,0.14);
+  border: 1px solid rgba(196,163,90,0.3);
+  color: var(--gold);
+  align-self: flex-end;
+}
+
+.bubble small {
+  display: block;
+  font-family: 'DM Sans', sans-serif;
+  font-style: normal;
+  font-size: 0.55rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.55;
+  margin-top: 0.3rem;
+}
+
+/* ── NOW ── */
+.now-quote {
+  margin-top: 2.5rem;
+  padding: 2.5rem;
+  background: var(--charcoal);
+  text-align: center;
+}
+
+.now-quote p {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(1.1rem, 3.5vw, 1.5rem);
+  color: var(--cream);
+  line-height: 1.65;
+}
+
+.now-quote cite {
+  display: block;
+  font-family: 'DM Sans', sans-serif;
+  font-style: normal;
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-top: 1rem;
+}
+
+/* ── PROGRESS BAR ── */
+#progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  background: linear-gradient(to right, var(--rose), var(--gold));
+  z-index: 9999;
+  width: 0%;
+  pointer-events: none;
+  /* Hardware accelerate to avoid triggering repaints */
+  will-change: width;
+}
+
+/* ── CHAPTER DOTS ── */
+.chapter-dots {
+  position: fixed;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 150;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+@media (max-width: 640px) { .chapter-dots { display: none; } }
+
+.cdot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--light);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.cdot.active { background: var(--rose); transform: scale(1.5); }
+
+/* ── FOOTER ── */
+footer {
+  text-align: center;
+  padding: 4rem 1.5rem;
+  background: var(--charcoal);
+  color: var(--muted);
+  border-top: 1px solid rgba(196,163,90,0.15);
+}
+
+.footer-rose {
+  font-size: 1.4rem;
+  display: block;
+  margin-bottom: 1rem;
+  animation: hb 1.6s ease-in-out infinite;
+}
+
+@keyframes hb { 0%,100%{transform:scale(1)} 50%{transform:scale(1.15)} }
+
+footer p {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--light);
+}
+
+footer small {
+  display: block;
+  margin-top: 0.6rem;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 480px) {
+  .section { padding: 3.5rem 1.2rem; }
+  .nav { padding: 0.6rem 1rem; }
+  .nav-links { gap: 0.8rem; }
+  .notes-grid { grid-template-columns: 1fr; }
+  .numbers-grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<nav class="chapter-dots" aria-label="Page sections">
+  <div class="cdot active" onclick="goTo('hero')"></div>
+  <div class="cdot" onclick="goTo('story')"></div>
+  <div class="cdot" onclick="goTo('timeline')"></div>
+  <div class="cdot" onclick="goTo('notes')"></div>
+  <div class="cdot" onclick="goTo('numbers')"></div>
+  <div class="cdot" onclick="goTo('real')"></div>
+  <div class="cdot" onclick="goTo('ily')"></div>
+  <div class="cdot" onclick="goTo('now')"></div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <p class="hero-eyebrow">3 March 2026 — Present</p>
+  <h1 class="hero-title">Karan &amp; <em>SS</em></h1>
+  <p class="hero-sub">A story told in messages, moments, and middle-of-the-night texts</p>
+  <div class="hero-stats">
+    <div class="stat">
+      <span class="stat-num">66</span>
+      <span class="stat-label">Days Together</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">6,994</span>
+      <span class="stat-label">Messages</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">118</span>
+      <span class="stat-label">Calls</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">22+</span>
+      <span class="stat-label">I Love Yous</span>
+    </div>
+  </div>
+  <div class="scroll-cue">
+    <div class="scroll-bar"></div>
+    Scroll
+  </div>
+</section>
+
+<!-- NAV -->
+<nav class="nav">
+  <span class="nav-logo">Karan & SS</span>
+  <ul class="nav-links">
+    <li><a href="#story">Story</a></li>
+    <li><a href="#timeline">Timeline</a></li>
+    <li><a href="#notes">Notes</a></li>
+    <li><a href="#real">The Real</a></li>
+    <li><a href="#now">Now</a></li>
+  </ul>
+</nav>
+
+<!-- STORY -->
+<div id="story">
+  <div class="section">
+    <p class="eyebrow">How it began</p>
+    <h2 class="heading">Hi Ji. <em>Hanji.</em></h2>
+    <div class="rule"></div>
+    <p class="body-text">
+      It started at a market, somewhere between window shopping and something more.
+      On <strong>March 3, 2026</strong>, Karan sent the first message — "Hi Ji" — and SS replied "Hanji."
+      Three hours later, after meeting in person, she told him he had <strong>"a very attractive smile."</strong>
+      He sent her a 🌹. He called her "just a rose." She told him she preferred <em>pink</em> roses —
+      dark pink, not magenta, not baby pink, the in-between one. He said he'd remember. He meant it.
+    </p>
+    <div class="first-msg reveal">
+      <blockquote>"You have a very attractive smile."</blockquote>
+      <cite>SS → Karan &nbsp;·&nbsp; March 3, 2026 &nbsp;·&nbsp; 10:18 PM</cite>
+    </div>
+  </div>
+</div>
+
+<!-- TIMELINE -->
+<div id="timeline" class="section--warm">
+  <div class="section">
+    <p class="eyebrow">Chapter by chapter</p>
+    <h2 class="heading">The <em>Timeline</em></h2>
+    <div class="rule"></div>
+    <div class="timeline">
+
+      <div class="t-item reveal">
+        <div class="t-dot"></div>
+        <p class="t-date">March 3–4, 2026</p>
+        <h3 class="t-title">The First Night</h3>
+        <p class="t-body">They met, spent the evening talking, and went home separately. By 11 PM they were still texting — debating who makes better chai, trading jokes, flirting in Hindi and English. She cleaned her house "so you can come up next time." He said: "I just wanted to spend time with you and just talk." She said: "And you're comfortable to talk to." The next morning: good morning texts, breakfast photos, poha vs. bananas with red chilli. It was already a whole thing.</p>
+        <div class="t-quote">
+          <p>"Whether I win or lose, I'll make a great meal for you."</p>
+          <span class="sp">Karan — about the chai debate, Night 1</span>
+        </div>
+        <span class="tag tag-sweet">Sweet Start</span>
+      </div>
+
+      <div class="t-item reveal">
+        <div class="t-dot rose"></div>
+        <p class="t-date">March 5–7, 2026</p>
+        <h3 class="t-title">Her Travels, His Thoughts</h3>
+        <p class="t-body">SS flew to Chennai for work. Karan waited up. "Just landed 🙈" — she was nervous before every flight. He tracked every landing. On March 7 — the single busiest day of their relationship at 368 messages — they planned their first real date: a movie on March 19. She booked the tickets. He called her baby for the first time. She said she preferred "baby" over "babu." He said: "Done. Baby it is."</p>
+        <div class="t-quote">
+          <p>"I like baby more than Babu."</p>
+          <span class="sp">SS — March 7</span>
+        </div>
+        <span class="tag tag-ms">Milestone</span>
+      </div>
+
+      <div class="t-item reveal">
+        <div class="t-dot blush"></div>
+        <p class="t-date">March 8–14, 2026</p>
+        <h3 class="t-title">His Turn to Travel</h3>
+        <p class="t-body">He flew out too — work trips, a knee injury, medication, a hospital visit. She was worried ("don't scare me like this"). He reassured her. They video called through bad hotel Wi-Fi, waited for each other to land, ate dinner "together" on FaceTime. She wanted to meet his cats. He was already counting the days.</p>
+        <div class="t-quote">
+          <p>"I wanna meet the cats too."</p>
+          <span class="sp">SS — March 14</span>
+        </div>
+        <span class="tag tag-sweet">Care</span>
+      </div>
+
+      <div class="t-item reveal">
+        <div class="t-dot"></div>
+        <p class="t-date">March 19, 2026</p>
+        <h3 class="t-title">The Movie Date</h3>
+        <p class="t-body">The date they'd planned since March 7. She took the day off. He sent food to her door. They went out together — just the two of them — for a film near her place. He had already saved her address from his history. That evening, he waited to hear she was home safe.</p>
+        <div class="t-quote">
+          <p>"Text me when you're home baby."</p>
+          <span class="sp">Karan — March 19, late night</span>
+        </div>
+        <span class="tag tag-ms">First Real Date</span>
+      </div>
+
+      <div class="t-item reveal">
+        <div class="t-dot terra"></div>
+        <p class="t-date">Late March – April 2026</p>
+        <h3 class="t-title">Building the Rhythm</h3>
+        <p class="t-body">Good mornings became ritual. She worried about him eating enough. He planned every date — Thai Basil on a Friday, Sunday brunches, new restaurants across Indiranagar. She traveled to Chennai and Bhubaneswar every few weeks. He ordered a surprise delivery to her door one morning. The package waited outside by her red doormat. She found it.</p>
+        <div class="t-quote">
+          <p>"Tried calling you baby. Aapke door ke bahar there is something."</p>
+          <span class="sp">Karan — March 26</span>
+        </div>
+        <span class="tag tag-sweet">Thoughtfulness</span>
+      </div>
+
+      <div class="t-item reveal">
+        <div class="t-dot rose"></div>
+        <p class="t-date">April 28, 2026</p>
+        <h3 class="t-title">The Serious Conversation</h3>
+        <p class="t-body">The morning after "I love you" — SS brought up something important. Marriage. Money. Expectations. Families. Health. She said she'd been "independent but broke mostly." He said he just wanted them to build things together, support each other's ambitions, save well. She went into a meeting. He said: "I'm clear. Don't have to think too much."</p>
+        <div class="t-quote">
+          <p>"Since parents know now, thought we should be on the same page about few things before we take it to them."</p>
+          <span class="sp">SS — April 28</span>
+        </div>
+        <span class="tag tag-ms">Big Step</span>
+      </div>
+
+      <div class="t-item reveal">
+        <div class="t-dot"></div>
+        <p class="t-date">April 28 – May 7, 2026</p>
+        <h3 class="t-title">She's Home</h3>
+        <p class="t-body">SS started spending days at Karan's place while he was away. She cooked with his things, fed his cats, slept in his house. "I miss cats," she'd said weeks earlier. Now she texted him: "She is visibly sad coz you're not here." One cat, missing him. SS, officially at home. He was already getting his mom's friend to find her a saree.</p>
+        <div class="t-quote">
+          <p>"Bas there's one huge problem. My main man isn't here with me."</p>
+          <span class="sp">SS — April 30, from his apartment</span>
+        </div>
+        <span class="tag tag-love">Living Together</span>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- LOVE NOTES -->
+<div id="notes">
+  <div class="section">
+    <p class="eyebrow">The sweetest lines</p>
+    <h2 class="heading">Things They <em>Actually Said</em></h2>
+    <div class="rule"></div>
+    <p style="font-size:0.88rem; color:var(--muted);">Real messages. Unedited. The ones that mattered.</p>
+    <div class="notes-grid" style="margin-top:2rem;">
+      <div class="note reveal"><p class="note-from">Karan → SS</p><p class="note-text">"You're just a rose. All in all — your smile, your eyes. Everything."</p><p class="note-date">March 3, 2026 · Night 1</p></div>
+      <div class="note reveal"><p class="note-from">Karan → SS</p><p class="note-text">"I was just watching you smile. Wahi thik hai."</p><p class="note-date">March 3, 2026 · After their first meeting</p></div>
+      <div class="note reveal"><p class="note-from">SS → Karan</p><p class="note-text">"I love your laughing face."</p><p class="note-date">April 23, 2026</p></div>
+      <div class="note reveal"><p class="note-from">Karan → SS</p><p class="note-text">"I really really really love you."</p><p class="note-date">April 28, 2026 · The morning after</p></div>
+      <div class="note reveal"><p class="note-from">SS → Karan</p><p class="note-text">"I LOVE YOU"</p><p class="note-date">May 4, 2026 · In caps, unprompted</p></div>
+      <div class="note reveal"><p class="note-from">SS → Karan</p><p class="note-text">"U know u miss someone so much that u get angry at them? Wo feeling."</p><p class="note-date">May 6 · From his apartment</p></div>
+      <div class="note reveal"><p class="note-from">Karan → SS</p><p class="note-text">"Tumhare jaisa koi nahi mila. Itna cute. Itna hot."</p><p class="note-date">March 3, 2026 · Night 1</p></div>
+      <div class="note reveal"><p class="note-from">SS → Karan</p><p class="note-text">"And you're comfortable to talk to."</p><p class="note-date">March 3 · The highest compliment</p></div>
+      <div class="note reveal"><p class="note-from">SS → Karan</p><p class="note-text">"Good morning baby monkey. Hope you're having a winning streak."</p><p class="note-date">March 14 · He was playing at 7 AM</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- NUMBERS -->
+<div id="numbers" class="section--dark">
+  <div class="section">
+    <p class="eyebrow">By the numbers</p>
+    <h2 class="heading">What <em>66 days</em> looks like in data</h2>
+    <div class="rule"></div>
+    <div class="numbers-grid">
+      <div class="num-box scale-reveal"><span class="num-big">6,994</span><span class="num-desc">Messages total</span></div>
+      <div class="num-box scale-reveal"><span class="num-big">3,645</span><span class="num-desc">From Karan</span></div>
+      <div class="num-box scale-reveal"><span class="num-big">3,349</span><span class="num-desc">From SS</span></div>
+      <div class="num-box scale-reveal"><span class="num-big">37</span><span class="num-desc">Video calls</span></div>
+      <div class="num-box scale-reveal"><span class="num-big">81</span><span class="num-desc">Voice calls</span></div>
+      <div class="num-box scale-reveal"><span class="num-big">368</span><span class="num-desc">Messages in one day (March 7)</span></div>
+      <div class="num-box scale-reveal"><span class="num-big">22+</span><span class="num-desc">"I love you" moments</span></div>
+      <div class="num-box scale-reveal"><span class="num-big">1</span><span class="num-desc">Chai debate — still ongoing</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- QUIRKS -->
+<div>
+  <div class="section">
+    <p class="eyebrow">The details</p>
+    <h2 class="heading">Things You <em>Know</em> About Each Other</h2>
+    <div class="rule"></div>
+    <div class="quirks-grid">
+      <div class="quirk-col reveal">
+        <h3>About SS</h3>
+        <ul class="quirk-list">
+          <li>Prefers dark pink roses — not magenta, not baby pink, the in-between one</li>
+          <li>Makes great poha. Claims superior chai. Unproven.</li>
+          <li>Gets nervous before every flight, without exception</li>
+          <li>Said "I love you" first, at 11:30 PM on April 27</li>
+          <li>Got "bhand" and passed out at a Koramangala gathering</li>
+          <li>Screams at people when angry — openly acknowledged</li>
+          <li>Became his cats' second mom without planning to</li>
+          <li>Calls him "baby monkey" when he's up at 7 AM playing sport</li>
+          <li>Posted "count your days" in her building group chat</li>
+          <li>Works in media. Has strong views on leggings quality.</li>
+        </ul>
+      </div>
+      <div class="quirk-col reveal">
+        <h3>About Karan</h3>
+        <ul class="quirk-list">
+          <li>Claims to be a chai master and great cook. Proof pending.</li>
+          <li>Woke up at 3 AM for an Arsenal score. Was briefly depressed. They won.</li>
+          <li>Sends surprise deliveries, then just calls to tell you</li>
+          <li>Plays pickleball / padel at 7 AM like it's nothing</li>
+          <li>Has two cats who miss him when he's away (SS confirmed)</li>
+          <li>Uses 🌹 the way normal people use full stops</li>
+          <li>Replied "I love you too" at 12:31 AM — he'd fallen asleep before she said it</li>
+          <li>Went saree shopping with his mom for SS. Couldn't help himself.</li>
+          <li>Hates matar. His dad loves matar pulao. He makes something else.</li>
+          <li>Built her a Netlify site and dropped the link casually in chat</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HARD PARTS -->
+<div id="real" class="section--warm">
+  <div class="section">
+    <p class="eyebrow">The real</p>
+    <h2 class="heading">The <em>Hard Moments</em></h2>
+    <div class="rule"></div>
+    <p style="font-size:0.88rem; line-height:1.75; color:var(--mid); max-width:520px; margin-bottom:2rem;">
+      Every real relationship has moments that test it. Here are some of theirs — navigated, not avoided.
+    </p>
+
+    <details class="reveal">
+      <summary>The "goodnight" misread</summary>
+      <div class="detail-body">On May 5, Karan said goodnight after SS was buried in a work sheet and couldn't call. She texted back minutes later: "Sorry are u mad at me?" He wasn't. She asked anyway. That's how much she cares about getting it right.</div>
+    </details>
+    <details class="reveal">
+      <summary>Distance between trips</summary>
+      <div class="detail-body">She was in Bhubaneswar, he was in Kolkata or Bengaluru. Multiple travel stretches through March and April meant they often went days without seeing each other — only voices and video calls through patchy hotel Wi-Fi.</div>
+    </details>
+    <details class="reveal">
+      <summary>The Serious Talk — April 28</summary>
+      <div class="detail-body">Parents already knew. The morning after "I love you," SS brought up marriage, money, expectations, health, families. She said she'd been "mostly independent but broke." He said: "I just want us both to be secure, support each other's ambitions, save well, and build things together." She went into a meeting. He was already clear.</div>
+    </details>
+    <details class="reveal">
+      <summary>The scooter situation</summary>
+      <div class="detail-body">Someone in her building kept vandalising her scooty. She posted on the building group: "Whoever is doing it, count your days." Karan said be diplomatic. She said: "Ye harassment hai Karan. I've been quiet about this long enough." He immediately said: bring the scooter to my place. Done.</div>
+    </details>
+    <details class="reveal">
+      <summary>Missing each other badly</summary>
+      <div class="detail-body">"U know u miss someone so much that u get angry at them? Wo feeling." — SS, sitting in his apartment in Indiranagar, waiting for him to return from Kolkata. One of the cats was also visibly sad. She confirmed this.</div>
+    </details>
+    <details class="reveal">
+      <summary>Timing, always timing</summary>
+      <div class="detail-body">He called, she was asleep. She called, his phone was dead. He passed out before she said "I love you" the first time. She found the missed call. He found her message at 12:31 AM and replied immediately. Timing was always their obstacle — and somehow also their proof.</div>
+    </details>
+  </div>
+</div>
+
+<!-- ILY -->
+<div class="ily-wrap" id="ily">
+  <span class="ily-eyebrow">April 27–28, 2026 · The moment</span>
+  <h2 class="ily-heading">She said it first.<br><em>He said it back.</em></h2>
+  <div class="ily-chat">
+    <div class="bubble bubble-her">
+      "I love you"
+      <small>SS · April 27, 11:30 PM</small>
+    </div>
+    <div style="text-align:center; color:rgba(250,247,242,0.2); letter-spacing:0.2em;">· · ·</div>
+    <div class="bubble bubble-him">
+      "I love you too"
+      <small>Karan · April 28, 12:31 AM · He'd fallen asleep</small>
+    </div>
+  </div>
+</div>
+
+<!-- NOW -->
+<div id="now">
+  <div class="section">
+    <p class="eyebrow">Chapter: ongoing</p>
+    <h2 class="heading">Where They Are <em>Now</em></h2>
+    <div class="rule"></div>
+    <p class="body-text">
+      As of <strong>May 7, 2026</strong> — 66 days in — SS is living with Karan in Indiranagar.
+      The cats are hers too now, apparently. His mom is getting her a saree.
+      They're still debating who makes better chai. He still sends 🌹.
+      She still says Hanji. Parents know. Conversations about the future have started.
+      There are more mornings ahead.
+    </p>
+    <div class="now-quote reveal">
+      <p>"Aisa nahi karte. Don't stress others out."<br><br>"Karunga."</p>
+      <cite>SS & Karan · May 7, 2026 · On getting her a saree anyway</cite>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-rose">🌹</span>
+  <p>From "Hi Ji" to home — in 66 days.</p>
+  <small>March 3 – May 7, 2026 &nbsp;·&nbsp; Bengaluru</small>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ── PROGRESS BAR ── */
+  var bar = document.getElementById('progress');
+
+  /* ── CHAPTER DOTS ── */
+  var sectionIds = ['hero','story','timeline','notes','numbers','real','ily','now'];
+  var dots = document.querySelectorAll('.cdot');
+
+  function goTo(id) {
+    var el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  }
+  window.goTo = goTo;
+
+  /* ── SCROLL REVEAL ──
+     iOS fix: elements start opacity:0 only (no transform on page load).
+     On intersection we add class "in" which sets opacity:1 and transform:none.
+     We apply the directional transform right before observing each element,
+     so it never exists on the initial paint / GPU texture upload.            */
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  var io2 = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io2.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  var reveals = document.querySelectorAll('.reveal');
+  reveals.forEach(function (el, i) {
+    /* Stagger within groups of 4 */
+    el.style.transitionDelay = ((i % 4) * 0.08) + 's';
+    /* Apply upward shift AFTER first paint */
+    requestAnimationFrame(function () {
+      if (!el.classList.contains('in')) {
+        el.style.transform = 'translateY(18px)';
+      }
+    });
+    io.observe(el);
+  });
+
+  var scaleReveals = document.querySelectorAll('.scale-reveal');
+  scaleReveals.forEach(function (el, i) {
+    el.style.transitionDelay = ((i % 4) * 0.07) + 's';
+    requestAnimationFrame(function () {
+      if (!el.classList.contains('in')) {
+        el.style.transform = 'scale(0.95)';
+      }
+    });
+    io2.observe(el);
+  });
+
+  /* ── SCROLL HANDLER — passive, RAF-throttled ── */
+  var ticking = false;
+
+  function onScroll() {
+    if (!ticking) {
+      requestAnimationFrame(function () {
+        /* Progress */
+        var scrolled = window.pageYOffset || document.documentElement.scrollTop;
+        var total = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.width = (total > 0 ? (scrolled / total) * 100 : 0) + '%';
+
+        /* Chapter dots */
+        var mid = scrolled + window.innerHeight * 0.4;
+        var active = 0;
+        sectionIds.forEach(function (id, i) {
+          var el = document.getElementById(id);
+          if (el && el.offsetTop <= mid) active = i;
+        });
+        dots.forEach(function (d, i) {
+          d.classList.toggle('active', i === active);
+        });
+
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll(); /* Initial state */
+
+})();
+</script>
+</body>
+</html>
